@@ -19,6 +19,9 @@ def analyze_text_statistics(text):
             letter_stats[letter] = 1
     
     total_letters = len(text)
+    
+    for i in text:
+        letter_stats[i] = letter_stats[i]/total_letters
 
     sorted_letters = dict(sorted(letter_stats.items()))
     
@@ -41,9 +44,12 @@ def analyze_text_statistics(text):
     
     total_bigrams = len(text) - 1
 
+    for i in text:
+        bigram_stats[i] = bigram_stats[i]/total_bigrams
+
     sorted_bigrams = dict(sorted(bigram_stats.items()))
     
-    return sorted_letters, sorted_bigrams, total_letters, total_bigrams
+    return sorted_letters, sorted_bigrams
 
 
 
@@ -53,7 +59,7 @@ if __name__ == "__main__":
         text = f.read()
     text = clean_text(text)
     
-    letter_list, bigram_list, total_letters, total_bigrams = analyze_text_statistics(text)
+    letter_list, bigram_list = analyze_text_statistics(text)
     print(letter_list)
     text1 = sorted(letter_list.items(),key=lambda x:x[1], reverse=True) # сортировка по количеству
     print(text1)
